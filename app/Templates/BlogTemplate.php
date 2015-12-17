@@ -12,17 +12,26 @@ class BlogTemplate extends AbstractTemplate
 
     protected $post;
 
-     function __construct(Post $post)
+    /**
+     * BlogTemplate constructor.
+     * @param Post $post
+     */
+    function __construct(Post $post)
      {
      	$this->post = $post;
      }
-    
-    public function prepare(View $view, array $parameters) 
+
+    /**
+     * @param View $view
+     * @param array $parameters
+     * @return mixed|void
+     */
+    public function prepare(View $view, array $parameters)
     {
     	$posts = $this->post->with('author')
-                                           ->where('published_at', '<', Carbon::now())
-                                           ->orderBy('published_at', 'desc')
-                                           ->paginate(10);
+                            ->where('published_at', '<', Carbon::now())
+                            ->orderBy('published_at', 'desc')
+                            ->paginate(10);
 
     	$view->with('posts', $posts);
     }

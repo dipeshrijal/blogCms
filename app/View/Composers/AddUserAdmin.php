@@ -11,7 +11,10 @@ use Illuminate\View\View;
 
 class AddUserAdmin
 {
-    public function compose(View $view) 
+    /**
+     * @param View $view
+     */
+    public function compose(View $view)
     {
         $view->with('admin', auth()->user());
     }

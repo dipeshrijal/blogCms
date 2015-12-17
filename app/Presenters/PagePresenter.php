@@ -9,6 +9,11 @@ class PagePresenter extends AbstractPresenter
 {
     protected $markDown;
 
+    /**
+     * PagePresenter constructor.
+     * @param object $object
+     * @param CommonMarkConverter $markDown
+     */
     function __construct($object, CommonMarkConverter $markDown)
     {
         $this->markDown = $markDown;
@@ -16,29 +21,45 @@ class PagePresenter extends AbstractPresenter
         parent::__construct($object);
     }
 
+    /**
+     * @return string
+     */
     public function contentHtml()
     {
         return $this->markDown->convertToHtml($this->content);
     }
 
+    /**
+     * @return string
+     */
     public function uriWildCard()
     {
         return $this->uri . '*';
     }
 
-    public function prettyUri() 
+    /**
+     * @return string
+     */
+    public function prettyUri()
     {
         return '/' . ltrim($this->uri, '/');
     }
-    
-    public function linkToPadedTitle($link) 
+
+    /**
+     * @param $link
+     * @return string
+     */
+    public function linkToPadedTitle($link)
     {
         $padding = str_repeat('&nbsp', $this->depth * 4);
         
         return $padding . link_to($link, $this->title);
     }
-    
-    public function padedTitle() 
+
+    /**
+     * @return string
+     */
+    public function padedTitle()
     {
         return str_repeat('&nbsp;', $this->depth * 4) . $this->title;
     }

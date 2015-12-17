@@ -12,17 +12,26 @@ class BlogPostTemplate extends AbstractTemplate
 
     protected $post;
 
-     function __construct(Post $post)
+    /**
+     * BlogPostTemplate constructor.
+     * @param Post $post
+     */
+    function __construct(Post $post)
      {
      	$this->post = $post;
      }
-    
-    public function prepare(View $view, array $parameters) 
+
+    /**
+     * @param View $view
+     * @param array $parameters
+     * @return mixed|void
+     */
+    public function prepare(View $view, array $parameters)
     {
     	$post = $this->post->with('author')
-                                           ->where('id', $parameters['id'])
-                                           ->where('slug', $parameters['slug'])
-                                           ->first();
+                            ->where('id', $parameters['id'])
+                            ->where('slug', $parameters['slug'])
+                            ->first();
 
     	$view->with('post', $post);
     }

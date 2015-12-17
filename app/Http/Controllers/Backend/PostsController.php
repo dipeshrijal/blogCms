@@ -2,15 +2,27 @@
 
 namespace blogCms\Http\Controllers\Backend;
 
-use blogCms\Post;
-use Illuminate\Http\Request;
 use blogCms\Http\Requests;
+use blogCms\Http\Requests\Post\StorePostRequest;
+use blogCms\Http\Requests\Post\UpdatePostRequest;
+use blogCms\Post;
 
+/**
+ * Class PostsController
+ * @package blogCms\Http\Controllers\Backend
+ */
 class PostsController extends Controller
 {
+    /**
+     * @var Post
+     */
     protected $post;
 
-    function __construct(Post $post) 
+    /**
+     * PostsController constructor.
+     * @param Post $post
+     */
+    function __construct(Post $post)
     {
         $this->post = $post;
 
@@ -32,6 +44,7 @@ class PostsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function create(Post $post)
@@ -42,25 +55,14 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StorePostRequest|\Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\Post\StorePostRequest $request)
+    public function store(StorePostRequest $request)
     {
         $this->post->create(['author_id' => auth()->user()->id]  + $request->only('title', 'slug', 'published_at', 'excerpt', 'body'));
 
         return redirect(route('backend.posts.index'))->withStatus('Post has been created');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -79,11 +81,11 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UpdatePostRequest|\Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\Post\UpdatePostRequest $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
         $post = $this->post->findOrFail($id);
 
@@ -94,6 +96,10 @@ class PostsController extends Controller
         return redirect(route('backend.posts.edit', $id))->withStatus('Post has been updated');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function confirm($id)
     {
         $post = $this->post->findOrFail($id);

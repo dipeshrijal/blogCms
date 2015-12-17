@@ -7,21 +7,38 @@ namespace blogCms;
 
 use Baum\Node;
 
+/**
+ * Class Page
+ * @package blogCms
+ */
 class Page extends Node
 {
-    protected $fillable = ['title', 'name', 'uri', 'content', 'template', 'hidden'];
+	/**
+	 * @var array
+     */
+	protected $fillable = ['title', 'name', 'uri', 'content', 'template', 'hidden'];
 
-    public function setNameAttribute($value)
+	/**
+	 * @param $value
+     */
+	public function setNameAttribute($value)
     {
     	$this->attributes['name'] = $value ?: null;
     }
 
-    public function setTemplateAttribute($value)
+	/**
+	 * @param $value
+     */
+	public function setTemplateAttribute($value)
     {
     	$this->attributes['template'] = $value ?: null;
     }
 
-    public function updateOrder($order, $orderPage)
+	/**
+	 * @param $order
+	 * @param $orderPage
+     */
+	public function updateOrder($order, $orderPage)
     {
     	$orderPage =  $this->findOrFail($orderPage);
 

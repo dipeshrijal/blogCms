@@ -8,6 +8,10 @@ use blogCms\User;
 use blogCms\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * Class AuthController
+ * @package blogCms\Http\Controllers\Auth
+ */
 class AuthController extends Controller
 {
 
@@ -16,7 +20,6 @@ class AuthController extends Controller
     /**
      * Create a new authentication controller instance.
      *
-     * @return void
      */
     public function __construct()
     {

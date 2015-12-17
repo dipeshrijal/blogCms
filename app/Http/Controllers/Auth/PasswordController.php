@@ -5,6 +5,10 @@ namespace blogCms\Http\Controllers\Auth;
 use blogCms\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+/**
+ * Class PasswordController
+ * @package blogCms\Http\Controllers\Auth
+ */
 class PasswordController extends Controller
 {
     use ResetsPasswords;
@@ -12,7 +16,6 @@ class PasswordController extends Controller
     /**
      * Create a new password controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -21,6 +24,10 @@ class PasswordController extends Controller
         $this->middleware('guest');
     }
 
+    /**
+     * @param $user
+     * @param $password
+     */
     protected function resetPassword($user, $password)
     {
         $user->password = $password;

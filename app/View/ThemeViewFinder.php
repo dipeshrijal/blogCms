@@ -4,21 +4,24 @@ namespace blogCms\View;
 
 use Illuminate\View\FileViewFinder;
 
-/**
- *
- */
 class ThemeViewFinder extends FileViewFinder
 {
     protected $activeTheme;
     
     protected $basePath;
-    
-    public function setBasePath($path) 
+
+    /**
+     * @param $path
+     */
+    public function setBasePath($path)
     {
         $this->basePath = $path;
     }
-    
-    public function setActiveTheme($theme) 
+
+    /**
+     * @param $theme
+     */
+    public function setActiveTheme($theme)
     {
         $this->activeTheme = $theme;
         

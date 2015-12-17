@@ -10,8 +10,8 @@ class UpdateLastLoginOnLogin
     /**
      * Handle the event.
      *
-     * @param  $user  $remember
-     * @return void
+     * @param  $user $remember
+     * @param $remember
      */
     public function handle($user, $remember)
     {

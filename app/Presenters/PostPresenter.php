@@ -6,24 +6,38 @@ use League\CommonMark\CommonMarkConverter;
 
 class PostPresenter extends AbstractPresenter
 {
-    function __construct($object, CommonMarkConverter $markDown) 
+    /**
+     * PostPresenter constructor.
+     * @param object $object
+     * @param CommonMarkConverter $markDown
+     */
+    function __construct($object, CommonMarkConverter $markDown)
     {
         $this->markDown = $markDown;
         
         parent::__construct($object);
     }
 
+    /**
+     * @return null|string
+     */
     public function excerptHtml()
     {
         return $this->excerpt ? $this->markDown->convertToHtml($this->excerpt) : null;
     }
 
+    /**
+     * @return null|string
+     */
     public function bodyHtml()
     {
         return $this->body ? $this->markDown->convertToHtml($this->body) : null;
     }
-    
-    public function publishedDate() 
+
+    /**
+     * @return string
+     */
+    public function publishedDate()
     {
         if ($this->published_at) 
         {
@@ -32,8 +46,11 @@ class PostPresenter extends AbstractPresenter
         
         return 'Not Published';
     }
-    
-    public function publishedHighlight() 
+
+    /**
+     * @return string
+     */
+    public function publishedHighlight()
     {
         if ($this->published_at && $this->published_at->isFuture()) 
         {

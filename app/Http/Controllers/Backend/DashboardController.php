@@ -5,9 +5,18 @@ namespace blogCms\Http\Controllers\Backend;
 use blogCms\Post;
 use blogCms\User;
 
+/**
+ * Class DashboardController
+ * @package blogCms\Http\Controllers\Backend
+ */
 class DashboardController extends Controller
 {
-    public function index(Post $post, User $user) 
+    /**
+     * @param Post $post
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Post $post, User $user)
     {
         $posts =  $post->latest('updated_at')->take(5)->get();
 

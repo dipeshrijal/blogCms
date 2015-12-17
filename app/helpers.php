@@ -2,7 +2,11 @@
 
 if (!function_exists('theme')) 
 {
-    function theme($path) 
+    /**
+     * @param $path
+     * @return string
+     */
+    function theme($path)
     {
         $config = app('config')->get('cms.theme');
         

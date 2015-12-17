@@ -2,20 +2,22 @@
 
 namespace blogCms\Http\Controllers;
 
+use blogCms\Http\Requests;
 use blogCms\Page;
 
-use Illuminate\Http\Request;
-
-use blogCms\Http\Requests;
-use blogCms\Http\Controllers\Controller;
-
+/**
+ * Class PageController
+ * @package blogCms\Http\Controllers
+ */
 class PageController extends Controller
 {
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Page $page
+     * @param array $parameters
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
     public function show(Page $page, array $parameters)
     {
@@ -24,7 +26,11 @@ class PageController extends Controller
         return view('page', compact('page'));
     }
 
-    public function prepareTemplate(Page $page,  array $parameters)
+    /**
+     * @param Page $page
+     * @param array $parameters
+     */
+    public function prepareTemplate(Page $page, array $parameters)
     {
         $templates = config('cms.templates');
 
